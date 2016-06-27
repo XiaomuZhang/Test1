@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+*{
+	padding:0px;
+	margin: 0px;
+	font:12px normal "microsoft yahei";
+}
+#tabs{
+	width:290px;
+	height:150px;
+	padding:5px;
+	margin:20px;
+}
+
+ul{
+	height:30px;
+	line-height:30px;
+	border-bottom:2px solid saddlebrown;
+}
+
+ul li{
+	width:60px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	float:left;
+	cursor:pointer;
+	list-style:none;
+	border:1px solid #aaaaaa;
+	border-bottom:none;
+	margin:0 3px;
+	display:inline-block;
+}
+
+li.on{
+	border-top:2px solid saddlebrown;
+	border-bottom: 2px solid #fff;
+}
+
+#tabs div{
+	height:120px;
+	border:1px solid #336699;
+	border-top:none;
+	padding:5px;
+}
+.hide{
+	display:none;
+}
+	
+</style>
+<body>
+<div id="tabs">
+	<ul>
+		<li class="on">房产</li>
+		<li>家居</li>
+		<li>二手房</li>
+	</ul>
+	<div>
+		275万购昌平邻铁三居 总价20万买一居<br />
+		200万内购五环三居 140万安家东三环<br />
+		北京首现零首付楼盘 53万购东5环50平<br />
+		京楼盘直降5000 中信府 公园楼王现房<br />
+	</div>
+	<div class='hide'>
+		40平出租屋大改造 美少女的混搭小窝<br />
+		经典清新简欧爱家 90平老房焕发新生<br />
+		新中式的酷色温情 66平撞色活泼家居<br />
+		瓷砖就像选好老婆 卫生间烟道的设计<br />
+	</div>
+	<div class='hide'>
+		通州豪华3居260万 二环稀缺2居250w甩 <br />
+		西3环通透2居290万 130万2居限量抢购 <br />
+		黄城根小学学区仅260万 121平70万抛! <br />
+		独家别墅280万 苏州桥2居优惠价248万 <br />
+	</div>
+</div>
+</body>
+<script>
+/*外层循环的作用是：让每一个li标签都在被点击时，达到切换效果的功能。
+
+内层循环的作用是：当点击其中一个li标签的时候，通过循环将所有li标签的class设置为空，将所有div标签的class都设置为"hide"，此时页面效果是li均未被点击，所有div内容都被隐藏。
+
+而内层循环后的语句：将当前被点击的li标签的class改为"on"，将此li标签下标所对应的div标签的class改为空，则此时页面就变成了li被点击、div内容展示的效果。*/
+	window.onload = function () {
+		var tabs = document.getElementById('tabs');
+		var lis = tabs.getElementsByTagName('li');
+		var divs = tabs.getElementsByTagName('div');
+
+		//利用循环为每个li标签绑定鼠标点击事件
+		for (var i =0; i<lis.length; i++) {
+			//每个lis[i]添加一个数字标记
+			lis[i].index = i;
+			//循环结束后，li上只是绑定了一个事件，并未调用函数
+			lis[i].onmouseover = function () {
+				for (var n =0; n<lis.length; n++){
+					lis[n].className = '';
+					divs[n].className = 'hide';
+				}
+				
+				this.className = 'on';//不能使用lis.[i]，因为上层循环结束后，i=3，
+				divs[this.index].className=  '';
+			};
+		}
+	};
+</script>
+</html>
